@@ -4,8 +4,9 @@ gradeC = "http://parmenides.wnyc.org/media/photologue/photos/Grade%20Card_C_v2.j
 gradePending = "http://parmenides.wnyc.org/media/photologue/photos/Grade%20Card_GradePending_v2.jpg"
 
 $.each($('div.restaurant-name'), function(index, inspection) {
+  var restaurantName = $(this).find('a').text().trim();
   var linkTitle = $(this).find('a').attr("title");
-  var address = linkTitle.split("</span>", 2)[1].split("<br />", 1);
+  var address = linkTitle.split("</span>", 2)[1].split("<br />", 1)[0];
 
   // Send address to server, wait for letter grade response
   var letterGrade = gradeB
