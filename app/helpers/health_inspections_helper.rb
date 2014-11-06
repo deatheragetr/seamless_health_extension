@@ -1,0 +1,2 @@
+module HealthInspectionsHelper
+end
