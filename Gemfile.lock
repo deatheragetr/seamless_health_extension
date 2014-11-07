@@ -21,8 +21,6 @@ GEM
       activemodel (= 4.1.6)
       activesupport (= 4.1.6)
       arel (~> 5.0.0)
-    activerecord-import (0.6.0)
-      activerecord (>= 3.0)
     activesupport (4.1.6)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
@@ -39,9 +37,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
-    dbi (0.4.5)
-      deprecated (= 2.0.1)
-    deprecated (2.0.1)
     erubis (2.7.0)
     execjs (2.2.2)
     hike (1.2.3)
@@ -124,9 +119,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-import
   coffee-rails (~> 4.0.0)
-  dbi
   httparty
   jbuilder (~> 2.0)
   jquery-rails

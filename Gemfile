@@ -28,8 +28,6 @@ gem 'spring',        group: :development
 gem 'pry', group: [:development, :test]
 
 gem 'httparty'
-gem 'activerecord-import'
-gem 'dbi'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
