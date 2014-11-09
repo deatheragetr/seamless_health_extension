@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :health_inspections
 
-  get '/' => 'health_inspections#test'
+  get '/health_inspections' => 'health_inspections#show_to_extension'
+  get '/health_inspections/:vendor_id' => 'health_inspections#show_to_webview'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
