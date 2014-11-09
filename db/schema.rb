@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103021126) do
+ActiveRecord::Schema.define(version: 20141107032437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,10 @@ ActiveRecord::Schema.define(version: 20141103021126) do
     t.text     "grade"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "seamless_vendor_id"
   end
+
+  add_index "health_inspections", ["phone"], name: "index_health_inspections_on_phone", using: :btree
+  add_index "health_inspections", ["seamless_vendor_id"], name: "index_health_inspections_on_seamless_vendor_id", using: :btree
 
 end
