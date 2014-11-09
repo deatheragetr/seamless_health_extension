@@ -1,28 +1,13 @@
-== README
+This readme explains some of the peculiarities of how our seamless app works:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+From restaurant index page on seamless.com on a browser that has this extension installed
 
-Things you may want to cover:
+1) Extension grabs Vendor ID (seamless unique--we hope), HREF to show page of restaurant and sends to backend
 
-* Ruby version
+2) we grab to see if we have matching rows with seamless vendo id
+  If not, make a request to HREF passed in params and grab the phone number and address off show page
+  2a) We then match the phone number/address against our records and populate (seamless vendor id) accordingly
+  If YES, grab appropriate records from database
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+3) Figure out most recent health grade and the url of violations show (health_inspections/:id) and send to client
+4) Client inserts this data into the DOM
