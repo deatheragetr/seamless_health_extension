@@ -1,13 +1,14 @@
 class HealthInspectionsController < ApplicationController
 
   def show_to_extension
-    inspections = HealthInspection.where(:seamless_vendor_id => params['vendorId'].to_i)
+    vendor_id = params['vendorId'].to_i
+    inspections = HealthInspection.where(:seamless_vendor_id => vendor_id)
 
     if inspections.empty?
       phone = SeamlessClient.new(params['restaurantHref']).phone
       inspections = HealthInspection.where(:phone => phone)
 
-      inspections.each { |inspection| inspection.update(:seamless_vendor_id => params['vendorId'].to_i) }
+      inspections.each { |inspection| inspection.update(:seamless_vendor_id => vendor_id) }
     end
 
     inspection = inspections.where('grade is NOT NULL') \
@@ -17,10 +18,11 @@ class HealthInspectionsController < ApplicationController
 
     render :json => {
       letter_grade: inspection.grade,
-      show_violations_url: "/health_inspections/#{inspection.id}"
+      show_violations_url: "http://localhost:3000/health_inspections/#{vendor_id}"
     }
   end
 
   def show_to_webview
+    @inspections = HealthInspection.where(:seamless_vendor_id => params['vendor_id'].to_i)
   end
 end
