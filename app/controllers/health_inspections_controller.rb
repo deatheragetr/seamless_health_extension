@@ -7,10 +7,7 @@ class HealthInspectionsController < ApplicationController
       phone = SeamlessClient.new(params['restaurantHref']).phone
       inspections = HealthInspection.where(:phone => phone)
 
-      inspections.each do |inspection|
-        inspection.seamless_vendor_id = params['vendorId'].to_i
-        inspection.save!
-      end
+      inspections.each { |inspection| inspection.update(:seamless_vendor_id => params['vendorId'].to_i) }
     end
 
     inspection = inspections.where('grade is NOT NULL') \
