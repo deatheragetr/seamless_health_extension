@@ -18,7 +18,7 @@
   "web_accessible_resources": [
     "*.jpg"
   ],
-  "browser_action": {
-    "default_icon": "GradeA.jpg"
+  "icons": {
+    "128": "GradeA_icon.png"
   }
 }
