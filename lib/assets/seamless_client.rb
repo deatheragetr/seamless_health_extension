@@ -3,7 +3,7 @@ require 'open-uri'
 class SeamlessClient
   attr_reader :seamless_base, :path, :show_page
   def initialize(path)
-    @seamless_base = "http://www.seamless.com"
+    @seamless_base = "http://www.seamless.com/food_delivery"
     @path          = path
     @show_page     = Nokogiri::HTML(open(seamless_base + path))
   end
