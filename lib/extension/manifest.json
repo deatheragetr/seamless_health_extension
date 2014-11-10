@@ -13,7 +13,7 @@
     }
   ],
   "permissions": [
-    "tabs", "https://seamless.com/*", "http://localhost:3000/*"
+    "tabs", "https://seamless.com/*", "http://localhost:3000/*", "http://seamless-health-grades.herokuapp.com/*"
   ],
   "web_accessible_resources": [
     "*.jpg"

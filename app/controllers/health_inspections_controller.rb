@@ -20,7 +20,7 @@ class HealthInspectionsController < ApplicationController
 
     render :json => {
       letter_grade: inspection.grade,
-      show_violations_url: "http://localhost:3000/health_inspections/#{vendor_id}"
+      show_violations_url: "http://seamless-health-grades.herokuapp.com/health_inspections/#{vendor_id}"
     }
   end
 
