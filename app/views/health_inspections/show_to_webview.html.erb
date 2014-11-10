@@ -1,5 +1,7 @@
 <ul>
   <% @inspections.each do |inspection| %>
-    <li><%= inspection.violation_description %></li>
+    <li>
+      <i class="icon-thumbs-down"></i><%= inspection.violation_description %>
+    </li>
   <% end %>
 </ul>
