@@ -1,5 +1,7 @@
 class HealthInspectionsController < ApplicationController
 
+  layout "show_page"
+
   def show_to_extension
     vendor_id = params['vendorId'].to_i
     inspections = HealthInspection.where(:seamless_vendor_id => vendor_id)
