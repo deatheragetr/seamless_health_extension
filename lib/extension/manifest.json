@@ -9,7 +9,7 @@
     {
       "matches": ["http://www.seamless.com/food-delivery/vendors*"],
       "js": ["jquery.js", "insert_grades.js"],
-      "run_at": "document_end"
+      "run_at": "document_start"
     }
   ],
   "permissions": [
