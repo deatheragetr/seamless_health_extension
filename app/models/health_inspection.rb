@@ -2,7 +2,7 @@ class HealthInspection < ActiveRecord::Base
   def self.query_or_fetch_all(params)
     # params { :vendor_id => "/path/on/seamless"
     vendor_ids = params.keys
-    inspections = where("seamless_vendor_id IN #{vendor_ids}")
+    inspections = where("seamless_vendor_id IN (#{vendor_ids.join(', ')})")
     populated_vendor_ids = inspections.collect(&:seamless_vendor_id)
     missing_vendor_ids = vendor_ids - populated_vendor_ids
 
