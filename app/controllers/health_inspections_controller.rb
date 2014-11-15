@@ -6,16 +6,20 @@ class HealthInspectionsController < ApplicationController
   def show_to_extension
     inspections = HealthInspection.query_or_fetch_all(params["json"]).to_a
 
-    require 'pry'; binding.pry
-    inspections.uniq! {|insp| !insp.grade.nil?  } \
-      .sort! { |insp| insp.inspection_date } \
+    inspections.select! {|insp| !insp.grade.nil?  } \
+      .sort! { |insp1, insp2| insp1.inspection_date <=> insp2.inspection_date } \
       .uniq! { |insp| insp.seamless_vendor_id }
 
-    resp = {}.tap do |rsp|
+    resp = {'grades_found' => {}}.tap do |rsp|
       inspections.each do |insp|
-        resp[insp.seamless_vendo_id] =  "http://seamless-health-grades.herokuapp.com/health_inspections/#{vendor_id}"
+        rsp['grades_found'][insp.seamless_vendor_id.to_s] =  {
+          url: "http://seamless-health-grades.herokuapp.com/health_inspections/#{insp.seamless_vendor_id}",
+          grade: insp.grade
+        }
       end
     end
+
+    resp['grades_not_found'] = params["json"].keys - resp['grades_found'].keys
     render :json => resp
   end
 
