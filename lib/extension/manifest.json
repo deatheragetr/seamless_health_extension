@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Seamless DOH Grades",
-  "description": "See health grades and violations alongside your favorite restaurants on seamless",
+  "description": "See NYC Dept of Health inspection grades and violations alongside your favorite restaurants on seamless",
   "version": "1.0",
 
   "content_scripts": [
@@ -13,7 +13,7 @@
     }
   ],
   "permissions": [
-    "tabs", "https://seamless.com/*", "http://localhost:3000/*", "http://seamless-health-grades.herokuapp.com/*"
+    "tabs", "https://seamless.com/*", "http://seamless-health-grades.herokuapp.com/*"
   ],
   "web_accessible_resources": [
     "*.jpg"
