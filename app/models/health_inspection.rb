@@ -14,6 +14,7 @@ class HealthInspection < ActiveRecord::Base
 
         new_inspections.each { |inspection| inspection.update(:seamless_vendor_id => vendor_id) }
         inspections.push(new_inspections).flatten!
+        ActiveRecord::Base.connection.close
       end
     end
     threads.each(&:join)
