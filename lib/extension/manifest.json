@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "SeamlessHealthChecker",
+  "name": "Seamless DOH Grades",
   "description": "See health grades and violations alongside your favorite restaurants on seamless",
   "version": "1.0",
 
@@ -19,6 +19,6 @@
     "*.jpg"
   ],
   "icons": {
-    "128": "GradeA_icon.png"
+    "128": "images/extension_icon_2.png"
   }
 }
