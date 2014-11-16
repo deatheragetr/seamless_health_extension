@@ -9,13 +9,9 @@ class SeamlessClient
   end
 
   def phone
-    show_page.css("p#RestaurantAddress span") \
-      .to_a \
-      .keep_if { |span| span.values.include? "telephone" } \
-      .first \
-      .children \
-      .first \
-      .inner_text \
-      .gsub(/[\s+|\(|\)|-]/, "")
+    telement = show_page.css("p#RestaurantAddress span").to_a.keep_if { |span| span.values.include? "telephone" }.first
+    unless telement.blank?
+      telement.children.first.inner_text.gsub(/[\s+|\(|\)|-]/, "")
+    end
   end
 end
