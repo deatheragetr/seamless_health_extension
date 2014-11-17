@@ -1,12 +1,16 @@
-  <% @inspections_by_date.each do |date, inspections| %>
-    <b><%= date %></b>
-    <ul class="health_violations">
-    <% inspections.each do |inspection| %>
-      <li>
-        <span><i class="fa fa-times"></i></span>
-        <%= inspection.violation_description %>
-      </li>
-      <br/>
-    <% end %>
-    </ul>
+<h2>
+  <%= @restaurant_name %>
+  <%= image_tag(image_name(@grade)) %>
+</h2>
+<% @inspections_by_date.each do |date, inspections| %>
+  <b><%= date %></b>
+  <ul class="health_violations">
+  <% inspections.each do |inspection| %>
+    <li>
+      <span><i class="fa fa-times"></i></span>
+      <%= inspection.violation_description %>
+    </li>
+    <br/>
+  <% end %>
+  </ul>
 <% end %>
