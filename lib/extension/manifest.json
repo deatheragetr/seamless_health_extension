@@ -13,7 +13,7 @@
     }
   ],
   "permissions": [
-    "tabs", "https://seamless.com/*", "http://seamless-health-grades.herokuapp.com/*"
+    "https://seamless.com/*", "http://seamless-health-grades.herokuapp.com/*"
   ],
   "web_accessible_resources": [
     "*.jpg", "*.gif"
