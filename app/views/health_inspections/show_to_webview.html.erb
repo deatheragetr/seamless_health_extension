@@ -1,7 +1,12 @@
-<ul>
-  <% @inspections.each do |inspection| %>
-    <li>
-    <i class="fa fa-arrows"></i><%= inspection.violation_description %>
-    </li>
-  <% end %>
-</ul>
+  <% @inspections_by_date.each do |date, inspections| %>
+    <b><%= date %></b>
+    <ul class="health_violations">
+    <% inspections.each do |inspection| %>
+      <li>
+        <span><i class="fa fa-times"></i></span>
+        <%= inspection.violation_description %>
+      </li>
+      <br/>
+    <% end %>
+    </ul>
+<% end %>

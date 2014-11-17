@@ -24,6 +24,13 @@ class HealthInspectionsController < ApplicationController
   end
 
   def show_to_webview
-    @inspections = HealthInspection.where(:seamless_vendor_id => params['vendor_id'].to_i)
+    inspections = HealthInspection.where("seamless_vendor_id = #{params[:vendor_id]} AND violation_description is NOT NULL")
+    @inspections_by_date = {}.tap do |resp|
+      inspections.each do |insp|
+        date = insp.inspection_date.strftime '%A, %B %d, %Y'
+        resp[date] ||= []
+        resp[date] << insp
+      end
+    end
   end
 end
