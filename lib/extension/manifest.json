@@ -16,7 +16,7 @@
     "tabs", "https://seamless.com/*", "http://seamless-health-grades.herokuapp.com/*"
   ],
   "web_accessible_resources": [
-    "*.jpg"
+    "*.jpg", "*.gif"
   ],
   "icons": {
     "128": "images/extension_icon_2.png"
