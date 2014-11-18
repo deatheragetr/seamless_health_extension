@@ -17,3 +17,4 @@
 
 #Don't forget to ignore that DS_STORE
 *.DS_STORE*
+.idea/
