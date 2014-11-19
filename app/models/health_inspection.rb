@@ -5,7 +5,7 @@ class HealthInspection < ActiveRecord::Base
     populated_vendor_ids = inspections.collect(&:seamless_vendor_id)
     missing_vendor_ids = vendor_ids - populated_vendor_ids
 
-    cached_do_not_call_ids = Rails.cache.fetch_multi(missing_vendor_ids)
+    cached_do_not_call_ids = missing_vendor_ids.map { |id| Rails.cache.fetch(id) }.compact
     noncached_missing_vendor_ids = missing_vendor_ids - cached_do_not_call_ids
 
     threads = []
