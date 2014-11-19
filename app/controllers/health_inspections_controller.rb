@@ -20,10 +20,7 @@ class HealthInspectionsController < ApplicationController
     end
 
     resp['grades_not_found'] = params["json"].keys - resp['grades_found'].keys
-
-    resp['grades_not_found'].each do |id|
-      Rails.cache.write(id) { id }
-    end
+    resp['grades_not_found'].each { |id| Rails.cache.write(id) }
 
     render :json => resp
   end
