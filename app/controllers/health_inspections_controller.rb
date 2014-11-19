@@ -20,6 +20,7 @@ class HealthInspectionsController < ApplicationController
     end
 
     resp['grades_not_found'] = params["json"].keys - resp['grades_found'].keys
+    Rails.cache.fetch_multi(resp['grades_not_found']) { |vendor_id| vendor_id }
     render :json => resp
   end
 
