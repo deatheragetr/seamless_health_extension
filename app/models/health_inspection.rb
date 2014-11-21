@@ -2,7 +2,7 @@ class HealthInspection < ActiveRecord::Base
   def self.query_or_fetch_all(params)
     vendor_ids = params.keys
     inspections = where("seamless_vendor_id IN (#{vendor_ids.join(', ')})")
-    populated_vendor_ids = inspections.collect(&:seamless_vendor_id)
+    populated_vendor_ids = inspections.collect(&:seamless_vendor_id).uniq.map(&:to_s)
     missing_vendor_ids = vendor_ids - populated_vendor_ids
 
     cached_do_not_call_ids = missing_vendor_ids.map { |id| Rails.cache.fetch(id) }.compact
