@@ -4,6 +4,9 @@ class HealthInspectionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
+    @best = HealthInspection.where("grade = 'A'").order('inspection_date desc').limit(30).uniq { |inspection| inspection.dba }
+    @worst = HealthInspection.where("grade = 'C'").order('inspection_date desc').limit(30).uniq { |inspection| inspection.dba }
+    require 'pry'; binding.pry
   end
 
   def show_to_extension
