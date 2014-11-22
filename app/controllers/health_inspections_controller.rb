@@ -10,7 +10,7 @@ class HealthInspectionsController < ApplicationController
     inspections = HealthInspection.query_or_fetch_all(params["json"]).to_a
 
     inspections.select! {|insp| !insp.grade.nil?  } \
-      .sort! { |insp1, insp2| insp1.inspection_date <=> insp2.inspection_date } \
+      .sort! { |insp1, insp2| insp2.inspection_date <=> insp1.inspection_date } \
       .uniq! { |insp| insp.seamless_vendor_id }
 
     resp = {'grades_found' => {}}.tap do |rsp|
