@@ -3,6 +3,9 @@ class HealthInspectionsController < ApplicationController
   layout "show_page"
   skip_before_filter :verify_authenticity_token
 
+  def index
+  end
+
   def show_to_extension
     inspections = HealthInspection.query_or_fetch_all(params["json"]).to_a
 
