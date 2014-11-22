@@ -29,10 +29,11 @@ class HealthInspectionsController < ApplicationController
   end
 
   def show_to_webview
-    inspections = HealthInspection.where("seamless_vendor_id = #{params[:vendor_id]} AND violation_description is NOT NULL")
+    inspections = HealthInspection.where("seamless_vendor_id = #{params[:vendor_id]} AND violation_description is NOT NULL") \
+      .sort { |insp1, insp2| insp2.inspection_date <=> insp1.inspection_date }
+
     @restaurant_name = inspections.first.dba
     @grade =  inspections.select {|insp| !insp.grade.nil?  } \
-      .sort { |insp1, insp2| insp1.inspection_date <=> insp2.inspection_date } \
       .first \
       .grade
     @inspections_by_date = {}.tap do |resp|
