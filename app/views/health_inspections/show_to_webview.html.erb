@@ -8,13 +8,6 @@
   <%= number_to_phone(@restaurant_phone) %>
 </h4>
 
-<iframe
-  width="600"
-  height="450"
-  frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBcD2eQvZCFmY1Z7AHSElofLzn2H8seStM
-    &q=<%= @encoded_address %>">
-</iframe>
 
 <h3>Restaurant Inspections</h3>
 
@@ -30,3 +23,13 @@
   <% end %>
   </ul>
 <% end %>
+</div>
+<div class="col-lg-3">
+  <iframe
+    width="350"
+    height="350"
+    frameborder="0" style="border:0"
+    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBcD2eQvZCFmY1Z7AHSElofLzn2H8seStM
+      &q=<%= @encoded_address %>">
+  </iframe>
+</div><!--/span-->
