@@ -33,11 +33,16 @@ class HealthInspectionsController < ApplicationController
   def show_to_webview
     inspections = HealthInspection.where("seamless_vendor_id = #{params[:vendor_id]} AND violation_description is NOT NULL") \
       .sort { |insp1, insp2| insp2.inspection_date <=> insp1.inspection_date }
+    most_recent_inspection = inspections.first
 
-    @restaurant_name = inspections.first.dba
+    @restaurant_name = most_recent_inspection.dba
+    @restaurant_address = "#{most_recent_inspection.building} #{most_recent_inspection.street}, #{most_recent_inspection.boro}"
+    @restaurant_phone = most_recent_inspection.phone
+
     @grade =  inspections.select {|insp| !insp.grade.nil?  } \
       .first \
       .grade
+
     @inspections_by_date = {}.tap do |resp|
       inspections.each do |insp|
         date = insp.inspection_date.strftime '%A, %B %d, %Y'

@@ -1,7 +1,14 @@
 <h2>
-  <%= @restaurant_name %>
-  <%= image_tag(image_name(@grade)) %>
+  <%= @restaurant_name %>  <%= image_tag(image_name(@grade)) %>
 </h2>
+
+<h4>
+  <%= @restaurant_address %>
+  <br>
+  <%= number_to_phone(@restaurant_phone) %>
+</h4>
+
+
 <% @inspections_by_date.each do |date, inspections| %>
   <b><%= date %></b>
   <ul class="health_violations">
