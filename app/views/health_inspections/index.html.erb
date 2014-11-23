@@ -1,18 +1,20 @@
-<h2>Find the gross</h2>
-
-<h2>The good</h2>
+<h2>The Eats</h2>
 <ul class="health_violations">
   <% @best.each do |inspection| %>
     <li>
-      <%= inspection.dba %>
+      <a href="/health_inspections/<%= inspection.seamless_vendor_id %>">
+        <%= inspection.dba %>
+      </a>
     </li>
   <% end %>
 </ul>
-<h2>The Bad</h2>
+<h2>The Don't Eats</h2>
 <ul class="health_violations">
   <% @worst.each do |inspection| %>
     <li>
-      <%= inspection.dba %>
+      <a href="/health_inspections/<%= inspection.seamless_vendor_id %>">
+        <%= inspection.dba %>
+      </a>
     </li>
   <% end %>
 </ul>
