@@ -36,7 +36,7 @@ class HealthInspectionsController < ApplicationController
     most_recent_inspection = inspections.first
 
     @restaurant_name = most_recent_inspection.dba
-    @restaurant_address = "#{most_recent_inspection.building} #{most_recent_inspection.street}, #{most_recent_inspection.boro}"
+    @restaurant_address = most_recent_inspection.address
     @restaurant_phone = most_recent_inspection.phone
 
     @grade =  inspections.select {|insp| !insp.grade.nil?  } \

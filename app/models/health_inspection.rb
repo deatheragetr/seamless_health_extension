@@ -1,4 +1,6 @@
 class HealthInspection < ActiveRecord::Base
+  geocoded_by :address
+  
   def self.query_or_fetch_all(params)
     vendor_ids = params.keys
     inspections = where("seamless_vendor_id IN (#{vendor_ids.join(', ')})")
@@ -21,5 +23,9 @@ class HealthInspection < ActiveRecord::Base
     end
     threads.each(&:join)
     inspections
+  end
+
+  def address
+    "#{building.rstrip} #{street.rstrip}, #{boro}"
   end
 end
