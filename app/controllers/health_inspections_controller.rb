@@ -9,7 +9,7 @@ class HealthInspectionsController < ApplicationController
   end
 
   def show_to_extension
-    inspections = HealthInspection.query_or_fetch_all(params["json"]).to_a
+    inspections = HealthInspection.query_or_fetch_all(params["json"]).to_a || []
 
     inspections.select! {|insp| !insp.grade.nil?  } \
       .sort! { |insp1, insp2| insp2.inspection_date <=> insp1.inspection_date } \
