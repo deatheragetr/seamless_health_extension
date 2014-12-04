@@ -9,11 +9,13 @@ class HealthInspectionsController < ApplicationController
   end
 
   def show_to_extension
-    inspections = HealthInspection.query_or_fetch_all(params["json"]).to_a || []
+    inspections = HealthInspection.query_or_fetch_all(params["json"]).to_a
+    inspections = inspections.select! {|insp| !insp.grade.nil?  } || []
 
-    inspections.select! {|insp| !insp.grade.nil?  } \
-      .sort! { |insp1, insp2| insp2.inspection_date <=> insp1.inspection_date } \
+    inspections.sort! { |insp1, insp2| insp2.inspection_date <=> insp1.inspection_date } \
       .uniq! { |insp| insp.seamless_vendor_id }
+
+    inspections ||= []
 
     resp = {'grades_found' => {}}.tap do |rsp|
       inspections.each do |insp|
