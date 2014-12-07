@@ -19,6 +19,6 @@
     "*.jpg", "*.gif"
   ],
   "icons": {
-    "128": "images/extension_icon_2.png"
+    "128": "images/extension_icon.png"
   }
 }
