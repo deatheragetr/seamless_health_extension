@@ -3,7 +3,7 @@
 
   "name": "Seamless DOH Grades",
   "description": "See NYC Dept of Health inspection grades and violations alongside your favorite restaurants on seamless",
-  "version": "1.0.1",
+  "version": "1.0.2",
 
   "content_scripts": [
     {
