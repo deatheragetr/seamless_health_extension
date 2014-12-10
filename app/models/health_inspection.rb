@@ -26,17 +26,21 @@ class HealthInspection < ActiveRecord::Base
   end
 
   def self.index_page_inspections(letter_grade, cuisine_description=nil)
-    inspections = self.where('seamless_vendor_id IS NOT NULL') \
-      .where("grade = '#{letter_grade}'")
+    # inspections = self.where('seamless_vendor_id IS NOT NULL') \
+    #   .where("grade = '#{letter_grade}'")
 
-    if cuisine_description
-      inspections = inspections.where("cuisine_description = '#{cuisine_description}'")
-    end
+    # if cuisine_description
+    #   inspections = inspections.where("cuisine_description = '#{cuisine_description}'")
+    # end
 
-    inspections.order('inspection_date desc') \
-      .limit(30) \
-      .to_a \
-      .uniq { |inspection| inspection.dba }
+    # inspections.order('inspection_date desc') \
+    #   .select('id', 'dba', 'seamless_vendor_id') \
+    #   .group('dba') \
+    #   .limit(30)
+
+    inspections = find_by_sql("select inspection_date, dba, grade, seamless_vendor_id from health_inspections where grade = '#{letter_grade}' AND seamless_vendor_id IS NOT NULL AND (inspection_date, dba) in (select max(inspection_date) as inspection_date, dba from health_inspections group by dba limit 1000)")
+
+    inspections.uniq(&:dba).slice(0, 10);
   end
 
   def address
