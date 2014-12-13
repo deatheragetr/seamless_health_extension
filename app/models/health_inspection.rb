@@ -39,15 +39,17 @@ class HealthInspection < ActiveRecord::Base
     #   .limit(30)
 
     inspections = find_by_sql(
-                              "select inspection_date, dba, grade, seamless_vendor_id from health_inspections
-                              where grade = '#{letter_grade}' AND seamless_vendor_id IS NOT NULL AND (inspection_date, dba)
-                              in (
-                                select max(inspection_date) as inspection_date, dba
-                                from health_inspections group by dba limit 1000
-                              )"
-                             )
+      "SELECT inspection_date, dba, grade, seamless_vendor_id
+      FROM health_inspections
+      WHERE grade = '#{letter_grade}'
+      AND seamless_vendor_id IS NOT NULL
+      AND (inspection_date, dba)
+      IN (SELECT MAX(inspection_date) AS inspection_date, dba
+        FROM health_inspections
+        GROUP BY dba LIMIT 1000)"
+    )
 
-    inspections.uniq(&:dba).slice(0, 10);
+    inspections.uniq(&:dba).slice(0, 10)
   end
 
   def address

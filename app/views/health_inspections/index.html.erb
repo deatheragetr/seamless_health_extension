@@ -1,20 +1,115 @@
+<select id="cuisine_description">
+  <option value="Afghan">Afghan</option>
+  <option value="African">African</option>
+  <option value="American ">American </option>
+  <option value="Armenian">Armenian</option>
+  <option value="Asian">Asian</option>
+  <option value="Australian">Australian</option>
+  <option value="Bagels/Pretzels">Bagels/Pretzels</option>
+  <option value="Bakery">Bakery</option>
+  <option value="Bangladeshi">Bangladeshi</option>
+  <option selected value="Barbecue">Barbecue</option>
+  <option value="Bottled beverages, including water, sodas, juices, etc.">Bottled beverages, including water, sodas, juices, etc.</option>
+  <option value="Brazilian">Brazilian</option>
+  <option value="Café/Coffee/Tea">Café/Coffee/Tea</option>
+  <option value="Cajun">Cajun</option>
+  <option value="Californian">Californian</option>
+  <option value="Caribbean">Caribbean</option>
+  <option value="Chicken">Chicken</option>
+  <option value="Chilean">Chilean</option>
+  <option value="Chinese">Chinese</option>
+  <option value="Chinese/Cuban">Chinese/Cuban</option>
+  <option value="Chinese/Japanese">Chinese/Japanese</option>
+  <option value="Continental">Continental</option>
+  <option value="Creole">Creole</option>
+  <option value="Creole/Cajun">Creole/Cajun</option>
+  <option value="Czech">Czech</option>
+  <option value="Delicatessen">Delicatessen</option>
+  <option value="Donuts">Donuts</option>
+  <option value="Eastern European">Eastern European</option>
+  <option value="Egyptian">Egyptian</option>
+  <option value="English">English</option>
+  <option value="Ethiopian">Ethiopian</option>
+  <option value="Filipino">Filipino</option>
+  <option value="French">French</option>
+  <option value="Fruits/Vegetables">Fruits/Vegetables</option>
+  <option value="German">German</option>
+  <option value="Greek">Greek</option>
+  <option value="Hamburgers">Hamburgers</option>
+  <option value="Hawaiian">Hawaiian</option>
+  <option value="Hotdogs">Hotdogs</option>
+  <option value="Hotdogs/Pretzels">Hotdogs/Pretzels</option>
+  <option value="Ice Cream, Gelato, Yogurt, Ices">Ice Cream, Gelato, Yogurt, Ices</option>
+  <option value="Indian">Indian</option>
+  <option value="Indonesian">Indonesian</option>
+  <option value="Iranian">Iranian</option>
+  <option value="Irish">Irish</option>
+  <option value="Italian">Italian</option>
+  <option value="Japanese">Japanese</option>
+  <option value="Jewish/Kosher">Jewish/Kosher</option>
+  <option value="Juice, Smoothies, Fruit Salads">Juice, Smoothies, Fruit Salads</option>
+  <option value="Korean">Korean</option>
+  <option value="Latin (Cuban, Dominican, Puerto Rican, South & Central American)">Latin (Cuban, Dominican, Puerto Rican, South & Central American)</option>
+  <option value="Mediterranean">Mediterranean</option>
+  <option value="Mexican">Mexican</option>
+  <option value="Middle Eastern">Middle Eastern</option>
+  <option value="Moroccan">Moroccan</option>
+  <option value="Not Listed/Not Applicable">Not Listed/Not Applicable</option>
+  <option value="Nuts/Confectionary">Nuts/Confectionary</option>
+  <option value="Other">Other</option>
+  <option value="Pakistani">Pakistani</option>
+  <option value="Pancakes/Waffles">Pancakes/Waffles</option>
+  <option value="Peruvian">Peruvian</option>
+  <option value="Pizza">Pizza</option>
+  <option value="Pizza/Italian">Pizza/Italian</option>
+  <option value="Polish">Polish</option>
+  <option value="Polynesian">Polynesian</option>
+  <option value="Portuguese">Portuguese</option>
+  <option value="Russian">Russian</option>
+  <option value="Salads">Salads</option>
+  <option value="Sandwiches">Sandwiches</option>
+  <option value="Sandwiches/Salads/Mixed Buffet">Sandwiches/Salads/Mixed Buffet</option>
+  <option value="Scandinavian">Scandinavian</option>
+  <option value="Seafood">Seafood</option>
+  <option value="Soul Food">Soul Food</option>
+  <option value="Soups">Soups</option>
+  <option value="Soups & Sandwiches">Soups & Sandwiches</option>
+  <option value="Southwestern">Southwestern</option>
+  <option value="Spanish">Spanish</option>
+  <option value="Steak">Steak</option>
+  <option value="Tapas">Tapas</option>
+  <option value="Tex-Mex">Tex-Mex</option>
+  <option value="Thai">Thai</option>
+  <option value="Turkish">Turkish</option>
+  <option value="Vegetarian">Vegetarian</option>
+  <option value="Vietnamese/Cambodian/Malaysia">Vietnamese/Cambodian/Malaysia</option>
+</select>
+
 <h2>The Eats</h2>
-<ul class="health_violations">
-  <% @best.each do |inspection| %>
-    <li>
-      <a href="/health_inspections/<%= inspection.seamless_vendor_id %>">
-        <%= inspection.dba %>
-      </a>
-    </li>
-  <% end %>
-</ul>
+<div id="eats"></div>
+
 <h2>The Don't Eats</h2>
-<ul class="health_violations">
-  <% @worst.each do |inspection| %>
-    <li>
-      <a href="/health_inspections/<%= inspection.seamless_vendor_id %>">
-        <%= inspection.dba %>
-      </a>
-    </li>
-  <% end %>
-</ul>
+<div id="dont_eats"></div>
+
+<script type="text/javascript">
+  $('#cuisine_description').change(function () {
+    $.ajax({
+          // url: 'http://seamless-health-grades.herokuapp.com/health_inspections',
+          url: 'http://localhost:3000/index_eats',
+          data: { 'cuisine_description': $('#cuisine_description').val() },
+          beforeSend: function(xhr) { xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')); },
+          type: 'GET',
+          success: function(response) {
+            loadRestaurants('eats', response);
+            loadRestaurants('dont_eats', response);
+          }
+        });
+  });
+
+  function loadRestaurants(grade, response) {
+    $('#' + grade).empty();
+    $.each(response[grade], function(i, object) {
+      $('#eats').append('<a href="/health_inspections/' + object.seamless_vendor_id + '">' + object.dba + '</a></br>');
+    })
+  }
+</script>

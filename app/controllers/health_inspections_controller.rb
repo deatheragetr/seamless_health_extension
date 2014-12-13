@@ -8,6 +8,15 @@ class HealthInspectionsController < ApplicationController
     @worst = HealthInspection.index_page_inspections('C')
   end
 
+  def index_eats
+    response_json = {}
+
+    response_json[:eats] = HealthInspection.index_page_inspections('A', params[:cuisine_description])
+    response_json[:dont_eats] = HealthInspection.index_page_inspections('C', params[:cuisine_description])
+
+    render :json => response_json
+  end
+
   def show_to_recently_ordered
     vendor_ids_and_links = {}
 
