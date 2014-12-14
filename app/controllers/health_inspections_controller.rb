@@ -29,7 +29,7 @@ class HealthInspectionsController < ApplicationController
     response_json = {'grades_found' => {}}.tap do |rsp|
       inspections.each do |insp|
         rsp['grades_found'][insp.seamless_vendor_id.to_s] =  {
-          url: "http://seamless-health-grades.herokuapp.com/health_inspections/#{insp.seamless_vendor_id}",
+          url: "http://cleaneats.nyc/health_inspections/#{insp.seamless_vendor_id}",
           grade: insp.grade,
           onclick_function: params['requestJson'][insp.seamless_vendor_id.to_s]['onClickFunction']
         }
@@ -54,7 +54,7 @@ class HealthInspectionsController < ApplicationController
     response_json = {'grades_found' => {}}.tap do |rsp|
       inspections.each do |insp|
         rsp['grades_found'][insp.seamless_vendor_id.to_s] =  {
-          url: "http://seamless-health-grades.herokuapp.com/health_inspections/#{insp.seamless_vendor_id}",
+          url: "http://cleaneats.nyc/health_inspections/#{insp.seamless_vendor_id}",
           grade: insp.grade
         }
       end
