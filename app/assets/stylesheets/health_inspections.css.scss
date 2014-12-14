@@ -5,3 +5,22 @@
 ul.health_violations {
   list-style-type: none;
 }
+
+body {
+  color:white;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  background-image: url("cement_and_brick.jpg");
+  background-attachment:fixed;
+}
+
+@media screen and (min-aspect-ratio: 3500/2333) {
+  body {
+    background-size: 100% auto;
+  }
+}
+
+@media screen and (max-aspect-ratio: 3500/2333) {
+  body {
+    background-attachment:fixed;
+  }
+}
