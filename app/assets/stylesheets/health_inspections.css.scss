@@ -9,7 +9,7 @@ ul.health_violations {
 body {
   color:black;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  background-image: image-url("cement_and_brick.jpg");
+  background-image: url(image-path('cement_and_brick.jpg'));
   background-attachment:fixed;
 }
 
