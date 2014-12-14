@@ -94,8 +94,8 @@
 <script type="text/javascript">
   $('#cuisine_description').change(function () {
     $.ajax({
-          // url: 'http://seamless-health-grades.herokuapp.com/health_inspections',
-          url: 'http://localhost:3000/index_eats',
+          url: 'http://seamless-health-grades.herokuapp.com/health_inspections',
+          // url: 'http://localhost:3000/index_eats',
           data: { 'cuisine_description': $('#cuisine_description').val() },
           beforeSend: function(xhr) { xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')); },
           type: 'GET',
