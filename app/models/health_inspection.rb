@@ -1,8 +1,8 @@
 class HealthInspection < ActiveRecord::Base
 
-  def self.query_or_fetch_all(params)
+  def self.query_or_fetch_all(params, phone_present=false)
     vendor_ids = params.keys
-    inspections = where("seamless_vendor_id IN (#{vendor_ids.join(', ')})")
+    inspections = HealthInspection.where("seamless_vendor_id IN (#{vendor_ids.join(', ')})")
 
     populated_vendor_ids = inspections.collect(&:seamless_vendor_id).uniq.map(&:to_s)
     missing_vendor_ids = vendor_ids - populated_vendor_ids
@@ -12,7 +12,7 @@ class HealthInspection < ActiveRecord::Base
     threads = []
     noncached_missing_vendor_ids.each do |vendor_id|
       threads << Thread.new do
-        phone = SeamlessClient.new(params[vendor_id]).phone
+        phone = phone_present ? params[vendor_id] : SeamlessClient.new(params[vendor_id]).phone
         new_inspections = HealthInspection.where(:phone => phone)
 
         new_inspections.each { |inspection| inspection.update(:seamless_vendor_id => vendor_id) }
@@ -20,7 +20,6 @@ class HealthInspection < ActiveRecord::Base
         ActiveRecord::Base.connection.close
       end
     end
-
     threads.each(&:join)
     filter_and_sort(inspections.to_a)
   end
@@ -64,7 +63,7 @@ class HealthInspection < ActiveRecord::Base
     def self.filter_and_sort(inspections)
       inspections = inspections.select! {|insp| !insp.grade.nil?  } || []
       inspections.sort! { |insp1, insp2| insp2.inspection_date <=> insp1.inspection_date } \
-        .uniq! { |insp| insp.seamless_vendor_id }
+        .uniq { |insp| insp.seamless_vendor_id }
     end
 
     def self.restaurant_phone_number(url)

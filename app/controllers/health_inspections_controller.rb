@@ -17,6 +17,21 @@ class HealthInspectionsController < ApplicationController
     render :json => response_json
   end
 
+  def seamless_show
+    vendor_id = params['requestJson']['vendorId']
+    phone_number = params['requestJson']['phoneNumber'].gsub(/\D/, '')
+    vendor_ids_and_links = { vendor_id => phone_number }
+
+    inspection = HealthInspection.query_or_fetch_all(vendor_ids_and_links, true).first
+
+    response_json = {
+      grade: inspection.grade,
+      url: "http://www.cleaneats.nyc/health_inspections/#{inspection.seamless_vendor_id}"
+    }
+
+    render :json => response_json
+  end
+
   def show_to_recently_ordered
     vendor_ids_and_links = {}
 
