@@ -24,10 +24,14 @@ class HealthInspectionsController < ApplicationController
 
     inspection = HealthInspection.query_or_fetch_all(vendor_ids_and_links, true).first
 
-    response_json = {
-      grade: inspection.grade,
-      url: "http://www.cleaneats.nyc/health_inspections/#{inspection.seamless_vendor_id}"
-    }
+    if inspection
+      response_json = {
+        grade: inspection.grade,
+        url: "http://www.cleaneats.nyc/health_inspections/#{inspection.seamless_vendor_id}"
+      }
+    else
+      response_json = { 'response' => 'Grade not found' }
+    end
 
     render :json => response_json
   end
