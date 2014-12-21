@@ -5,3 +5,39 @@
 ul.health_violations {
   list-style-type: none;
 }
+
+body {
+  color:white;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  background-image: url(asset-path('cement_and_brick.jpg'));
+  background-attachment:fixed;
+}
+
+#map {
+  padding-right:4%
+}
+
+footer {
+  position:static;
+  bottom:0;
+  left:2%;
+  width:100%;
+}
+
+@media screen and (min-aspect-ratio: 3500/2333) {
+  body {
+    background-size: 100% auto;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #map {
+    position: fixed;
+  }
+}
+
+@media screen and (max-aspect-ratio: 3500/2333) {
+  body {
+    background-attachment:fixed;
+  }
+}
