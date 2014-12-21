@@ -50,4 +50,5 @@ gem "twitter-bootstrap-rails"
 
 gem 'dalli'
 gem 'memcachier'
-gem 'foreigner'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
