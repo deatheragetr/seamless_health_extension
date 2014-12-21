@@ -27,7 +27,8 @@ class HealthInspectionsController < ApplicationController
     if inspection
       response_json = {
         grade: inspection.grade,
-        url: "http://www.cleaneats.nyc/health_inspections/#{inspection.seamless_vendor_id}"
+        url: "http://www.cleaneats.nyc/health_inspections/#{inspection.seamless_vendor_id}",
+        path: "/health_inspections/#{inspection.seamless_vendor_id}"
       }
     else
       response_json = { 'response' => 'Grade not found' }
@@ -73,8 +74,9 @@ class HealthInspectionsController < ApplicationController
     response_json = {'grades_found' => {}}.tap do |rsp|
       inspections.each do |insp|
         rsp['grades_found'][insp.seamless_vendor_id.to_s] =  {
+          grade: insp.grade,
           url: "http://www.cleaneats.nyc/health_inspections/#{insp.seamless_vendor_id}",
-          grade: insp.grade
+          path: "/health_inspections/#{insp.seamless_vendor_id}"
         }
       end
     end
@@ -96,10 +98,7 @@ class HealthInspectionsController < ApplicationController
     @restaurant_address = most_recent_inspection.address
     @encoded_address = most_recent_inspection.encoded_address
     @restaurant_phone = most_recent_inspection.phone
-
-    @grade =  inspections.select {|insp| !insp.grade.nil?  } \
-      .first \
-      .grade
+    @grade = inspections.select { |insp| !insp.grade.nil? }.first.grade
 
     @inspections_by_date = {}.tap do |resp|
       inspections.each do |insp|
