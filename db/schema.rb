@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141210044734) do
+ActiveRecord::Schema.define(version: 20141213213351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,5 +46,36 @@ ActiveRecord::Schema.define(version: 20141210044734) do
   add_index "health_inspections", ["grade"], name: "index_health_inspections_on_grade", using: :btree
   add_index "health_inspections", ["phone"], name: "index_health_inspections_on_phone", using: :btree
   add_index "health_inspections", ["seamless_vendor_id"], name: "index_health_inspections_on_seamless_vendor_id", using: :btree
+
+  create_table "inspections", force: true do |t|
+    t.integer  "restaurant_id",         null: false
+    t.string   "inspection_type"
+    t.text     "violation_description"
+    t.datetime "grade_date"
+    t.datetime "inspection_date"
+    t.string   "critical_flag"
+    t.string   "violation_code"
+    t.datetime "record_date"
+    t.text     "action"
+    t.string   "grade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "restaurants", force: true do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.string   "building"
+    t.string   "street"
+    t.string   "zip"
+    t.string   "borough"
+    t.string   "cuisine_description"
+    t.string   "current_grade"
+    t.string   "seamless_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_foreign_key "inspections", "restaurants", name: "inspections_restaurant_id_fk"
 
 end

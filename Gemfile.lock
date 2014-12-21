@@ -41,6 +41,8 @@ GEM
     dalli (2.7.2)
     erubis (2.7.0)
     execjs (2.2.2)
+    foreigner (1.7.1)
+      activerecord (>= 3.0.0)
     hike (1.2.3)
     httparty (0.13.0)
       json (~> 1.8)
@@ -147,6 +149,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
   dalli
+  foreigner
   httparty
   jbuilder (~> 2.0)
   jquery-rails
