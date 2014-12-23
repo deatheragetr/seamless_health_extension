@@ -39,24 +39,8 @@ GEM
     coffee-script-source (1.8.0)
     commonjs (0.2.7)
     dalli (2.7.2)
-    elasticsearch (1.0.6)
-      elasticsearch-api (= 1.0.6)
-      elasticsearch-transport (= 1.0.6)
-    elasticsearch-api (1.0.6)
-      multi_json
-    elasticsearch-model (0.1.6)
-      activesupport (> 3)
-      elasticsearch (> 0.4)
-      hashie
-    elasticsearch-rails (0.1.6)
-    elasticsearch-transport (1.0.6)
-      faraday
-      multi_json
     erubis (2.7.0)
     execjs (2.2.2)
-    faraday (0.8.9)
-      multipart-post (~> 1.2.0)
-    hashie (1.2.0)
     hike (1.2.3)
     httparty (0.13.0)
       json (~> 1.8)
@@ -84,7 +68,6 @@ GEM
     minitest (5.4.2)
     multi_json (1.10.1)
     multi_xml (0.5.5)
-    multipart-post (1.2.0)
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
     pg (0.17.1)
@@ -164,8 +147,6 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
   dalli
-  elasticsearch-model
-  elasticsearch-rails
   httparty
   jbuilder (~> 2.0)
   jquery-rails
