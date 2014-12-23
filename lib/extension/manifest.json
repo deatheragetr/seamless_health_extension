@@ -15,7 +15,7 @@
   "permissions": [
     "https://seamless.com/*",
     "http://seamless-health-grades.herokuapp.com/*",
-    "http://www.cleaneats.nyc",
+    "http://www.cleaneats.nyc"
   ],
   "web_accessible_resources": [
     "*.jpg", "*.gif"
