@@ -7,7 +7,7 @@
 
   "content_scripts": [
     {
-      "matches": ["http://www.seamless.com/*"],
+      "matches": ["http://www.seamless.com/*", "http://www.cleaneats.nyc/*"],
       "js": ["jquery.js", "insert_grades.js"],
       "run_at": "document_start"
     }

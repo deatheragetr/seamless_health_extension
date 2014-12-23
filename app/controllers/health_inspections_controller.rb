@@ -50,6 +50,7 @@ class HealthInspectionsController < ApplicationController
       inspections.each do |insp|
         rsp['grades_found'][insp.seamless_vendor_id.to_s] =  {
           url: "http://www.cleaneats.nyc/health_inspections/#{insp.seamless_vendor_id}",
+          path: "/health_inspections/#{insp.seamless_vendor_id}",
           grade: insp.grade,
           onclick_function: params['requestJson'][insp.seamless_vendor_id.to_s]['onClickFunction']
         }
