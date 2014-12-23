@@ -16,7 +16,6 @@
     "https://seamless.com/*",
     "http://seamless-health-grades.herokuapp.com/*",
     "http://www.cleaneats.nyc",
-    "http://localhost:3000/*"
   ],
   "web_accessible_resources": [
     "*.jpg", "*.gif"
