@@ -47,6 +47,7 @@ gem "twitter-bootstrap-rails"
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'rollbar', '~> 1.2.7'
 
 gem 'dalli'
 gem 'memcachier'
