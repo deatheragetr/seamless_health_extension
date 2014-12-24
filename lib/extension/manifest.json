@@ -3,17 +3,25 @@
 
   "name": "CleanEats.NYC - Seamless Restaurant Grades",
   "description": "See NYC Dept of Health inspection grades and violations alongside your favorite restaurants on Seamless",
-  "version": "1.0.6",
+  "version": "1.0.7",
 
   "content_scripts": [
     {
-      "matches": ["http://www.seamless.com/*"],
+      "matches": [
+        "*://www.cleaneats.nyc/*",
+        "*://www.seamless.com/*",
+        "*://www.yelp.com/*",
+        "*://www.opentable.com/*"
+      ],
       "js": ["jquery.js", "insert_grades.js"],
       "run_at": "document_start"
     }
   ],
   "permissions": [
-    "https://www.seamless.com/*"
+    "*://www.cleaneats.nyc/*",
+    "*://www.seamless.com/*",
+    "*://www.yelp.com/*",
+    "*://www.opentable.com/*"
   ],
   "web_accessible_resources": [
     "*.jpg", "*.gif"
