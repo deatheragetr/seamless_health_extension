@@ -1,6 +1,4 @@
 Rails.application.configure do
-  ENV['ROLLBAR_ACCESS_TOKEN'] = 'c0e3a3e87dc1403a83f8df2ec62b5723';
-
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
