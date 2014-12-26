@@ -40,30 +40,32 @@ class HealthInspectionsController < ApplicationController
   def show_to_recently_ordered
     vendor_ids_and_links = {}
 
-    params['requestJson'].each do |vendor_id, hash|
-      vendor_ids_and_links[vendor_id] = hash['restaurantLink']
-    end
-
-    inspections = HealthInspection.query_or_fetch_all(vendor_ids_and_links) || []
-
-    response_json = {'grades_found' => {}}.tap do |rsp|
-      inspections.each do |insp|
-        rsp['grades_found'][insp.seamless_vendor_id.to_s] =  {
-          url: "http://www.cleaneats.nyc/health_inspections/#{insp.seamless_vendor_id}",
-          path: "/health_inspections/#{insp.seamless_vendor_id}",
-          grade: insp.grade,
-          onclick_function: params['requestJson'][insp.seamless_vendor_id.to_s]['onClickFunction']
-        }
+    if params['requestJson']
+      params['requestJson'].each do |vendor_id, hash|
+        vendor_ids_and_links[vendor_id] = hash['restaurantLink']
       end
-    end
 
-    grades_not_found = params['requestJson'].keys - response_json['grades_found'].keys
-    grades_not_found.each { |id| Rails.cache.write(id, id) }
+      inspections = HealthInspection.query_or_fetch_all(vendor_ids_and_links) || []
 
-    response_json['grades_not_found'] = {}
+      response_json = {'grades_found' => {}}.tap do |rsp|
+        inspections.each do |insp|
+          rsp['grades_found'][insp.seamless_vendor_id.to_s] =  {
+            url: "http://www.cleaneats.nyc/health_inspections/#{insp.seamless_vendor_id}",
+            path: "/health_inspections/#{insp.seamless_vendor_id}",
+            grade: insp.grade,
+            onclick_function: params['requestJson'][insp.seamless_vendor_id.to_s]['onClickFunction']
+          }
+        end
+      end
 
-    grades_not_found.each do |vendor_id|
-      response_json['grades_not_found'][vendor_id] = params['requestJson'][vendor_id]['onClickFunction']
+      grades_not_found = params['requestJson'].keys - response_json['grades_found'].keys
+      grades_not_found.each { |id| Rails.cache.write(id, id) }
+
+      response_json['grades_not_found'] = {}
+
+      grades_not_found.each do |vendor_id|
+        response_json['grades_not_found'][vendor_id] = params['requestJson'][vendor_id]['onClickFunction']
+      end
     end
 
     render :json => response_json
